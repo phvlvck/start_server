@@ -1,23 +1,19 @@
-from pywebio import *
-from pywebio.output import *
-from pywebio import start_server
-import requests
-import os
 
-ID = ('1786031358')
-token = '7162463797:AAGnBvgQIUcX0ATXk8vYBrBs7w0_rsbYP_U'  # تعريف المتغير هنا
+<!DOCTYPE html>
+<html>
+<head>
+    <title>خلفية صورة</title>
+    <style>
+        body {
+            background-image: url('https://i.imgur.com/C8hp84G_d.webp?maxwidth=760&fidelity=grand'); /* استبدل your-image.jpg بمسار صورتك */
+            background-size: cover; /* لملء الخلفية بالصورة */
+            background-repeat: no-repeat; /* لمنع تكرار الصورة */
+        }
+    </style>
+</head>
+</body>
+</html>
 
-tlg1 = '\nتم تشغيل '
-requests.get('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(ID) + '&text=' + str(tlg1))
-
-#tlg1 = '\nتم تشغيل '
-
-
-config = {
-   
-    'background_link': "https://i.imgur.com/neyQFT3_d.webp?maxwidth=760&fidelity=grand",
-    'text_color': "white",
-   'main_text':"""
         <li>𝗠𝗬 𝗡𝗔𝗠𝗘:𝗔𝗵𝗺𝗲𝗱</li>
         <li>𝗠𝗬 𝗡𝗜𝗖𝗞𝗡𝗔𝗠𝗘:𝗕𝗶𝘀𝗼</li>
         <li>𝗠𝗠𝗬 𝗔𝗚𝗘:𝟭𝟱</li>
