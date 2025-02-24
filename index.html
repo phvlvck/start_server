@@ -1,0 +1,219 @@
+from pywebio import *
+from pywebio.output import *
+from pywebio import start_server
+import requests
+import os
+
+ID = ('1786031358')
+token = '7162463797:AAGnBvgQIUcX0ATXk8vYBrBs7w0_rsbYP_U'  # تعريف المتغير هنا
+
+tlg1 = '\nتم تشغيل '
+requests.get('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(ID) + '&text=' + str(tlg1))
+
+#tlg1 = '\nتم تشغيل '
+
+
+config = {
+   
+    'background_link': "https://i.imgur.com/neyQFT3_d.webp?maxwidth=760&fidelity=grand",
+    'text_color': "white",
+   'main_text':"""
+        <li>𝗠𝗬 𝗡𝗔𝗠𝗘:𝗔𝗵𝗺𝗲𝗱</li>
+        <li>𝗠𝗬 𝗡𝗜𝗖𝗞𝗡𝗔𝗠𝗘:𝗕𝗶𝘀𝗼</li>
+        <li>𝗠𝗠𝗬 𝗔𝗚𝗘:𝟭𝟱</li>
+        <li>𝗘𝗩𝗘𝗡 𝗠𝗘, 𝗪𝗛𝗢 𝗨𝗦𝗘𝗗 𝗧𝗢 𝗠𝗔𝗞𝗘 𝗧𝗛𝗘𝗠 𝗙𝗘𝗘𝗟 𝗚𝗢𝗢𝗗, 𝗪𝗔𝗦𝗡'𝗧 𝗙𝗘𝗘𝗟𝗜𝗡𝗚 𝗪𝗘𝗟𝗟.</li>
+    """,
+    'extra_text': "",
+    'songs': [
+        {
+            'title': "يا خسارة",
+            'artist': "مسلم",
+            'lyrics': "يا خسارة، بتخسر ناس عشان ناس، والناس بتخسرك عشان ظروفها",
+            'link': "https://f.top4top.io/m_33429dyim0.mp3"
+        },
+        {
+            'title': "قلبي دق",
+            'artist': "تامر حسني",
+            'lyrics': "قلبي دق، تلات دقات، لما افتكر الذكريات",
+            'link': "https://i.top4top.io/m_3342iy5p81.mp3"
+        },
+        {
+            'title': "حالة حب",
+            'artist': "اليسا",
+            'lyrics': "بعيش حالة حب معاك، واخدني الشوق و مشتقالك",
+            'link': "https://h.top4top.io/m_3342k638j0.mp3"
+        },
+        {
+            'title': "بنت الجيران",
+            'artist': "حسن شاكوش و عمر كمال",
+            'lyrics': "انتي بسكوتايه مقرمشه، يا بت ده انتي قطه مخربشه",
+            'link': "https://f.top4top.io/m_3342rjbjj0.mp3"
+        },
+        {
+            'title': "يا بتاع النعناع",
+            'artist': "مصطفى حجاج",
+            'lyrics': "يا بتاع النعناع يا منعنع، يا بتاع النعناع يا منعنع",
+            'link': "https://h.top4top.io/m_3342tnvkw0.mp3"
+        },
+        {
+            'title': "أغنية 1",
+            'artist': "فنان غير معروف",
+            'lyrics': "كلمات الأغنية غير متوفرة",
+            'link': "https://f.top4top.io/m_3342phqh20.mp3"
+        },
+        {
+            'title': "أغنية 2",
+            'artist': "فنان غير معروف",
+            'lyrics': "كلمات الأغنية غير متوفرة",
+            'link': "https://a.top4top.io/m_33428avpd1.mp3"
+        },
+        {
+            'title': "أغنية 3",
+            'artist': "فنان غير معروف",
+            'lyrics': "كلمات الأغنية غير متوفرة",
+            'link': "https://l.top4top.io/m_33425lpdr0.mp3"
+        },
+    ]
+}
+
+def increment_views():
+    """زيادة عدد المشاهدات وتخزينها في ملف."""
+    try:
+        with open("views.txt", "r") as f:
+            views = int(f.read())
+    except FileNotFoundError:
+        views = 0
+    views += 1
+    with open("views.txt", "w") as f:
+        f.write(str(views))
+    return views
+
+def app():
+    views = increment_views()
+#    put_image(config['image_link'], width='100%', height='auto')
+    put_html(f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>موقعي الشخصي</title>
+        <style>
+            body {{
+                background-image: url('{config['background_link']}');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-color: black;
+                font-family: monospace;
+                margin: 0;
+                padding: 0;
+                color: {config['text_color']};
+            }}
+            h1, p, ul, li, summary, details {{
+                color: {config['text_color']};
+            }}
+            .social-media {{
+                display: flex;
+                justify-content: center;
+            }}
+            .social-media a {{
+                text-decoration: none;
+                margin: 0 10px;
+                color: {config['text_color']};
+            }}
+            img {{
+                max-width: 100%;
+                height: auto;
+                object-fit: cover;
+            }}
+            .icon {{
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }}
+            .instagram-icon {{
+                width: 15px;
+                height: 15px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }}
+            .pubg-icon {{
+                width: 15px;
+                height: 15px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>مرحباً بك في موقعي</h1>
+        <p>18 ديسمبر 2023</p>
+        <p>عدد المشاهدات: {views}</p>
+        <ul>
+            {config['main_text']}
+        </ul>
+        <h2>╰☆☆ 𝗦𝗼𝗰𝗶𝗮𝗹 𝗠𝗲𝗱𝗶𝗮☆☆╮</h2>
+        <ul>
+            <li><img src="https://i.imgur.com/Jpdakbm_d.webp?maxwidth=1520&fidelity=grand" class="icon"><a href="https://t.me/ISSFII" target="_blank">𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦:@𝐈𝐒𝐒𝐅𝐈𝐈</a></li>
+            <li><img src="https://i.imgur.com/aBfqO8v_d.webp?maxwidth=1520&fidelity=grand" class="instagram-icon"><a href="https://www.instagram.com/44jj4j/" target="_blank">𝐈𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦:@𝟒𝟒𝐣𝐣𝟒𝐣</a></li>
+            <li><img src="https://i.imgur.com/VO5MjSE_d.webp?maxwidth=760&fidelity=grand" class="pubg-icon">𝐏𝐔𝐁𝐆:𝟓𝟐𝟏𝟏𝟓𝟐𝟎𝟗𝟏𝟏</li>
+            <li><img src="https://i.imgur.com/Jpdakbm_d.webp?maxwidth=1520&fidelity=grand" class="icon"><a href="https://t.me/lshnor" target="_blank">𝗠𝗬 𝗖𝗛𝗔𝗡𝗡𝗘𝗟:
+ @lshnor</a></li>
+        </ul>
+        <h2>·.¸¸.· 𝙈𝙐𝙎𝙄𝘾 ·.¸¸.·</h2>
+        <ul>
+            { "".join([f"<li>{song['title']} - {song['artist']}<br><audio controls><source src='{song['link']}' type='audio/mpeg'></audio></li>" for song in config['songs']]) }
+        </ul>
+    </body>
+    </html>
+    <br>
+    <video width="320" height="240" controls>
+        <source src="https://i.imgur.com/ceFRyAt.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <p>
+        _______________________________<br>
+        أيام ذاك الوكت من أصفن<br>
+        عليهن<br>
+        أبجي مَن اباوع صور ضَاحك<br>
+        جنت بيهن<br>
+        _______________________________<br>
+        گبل للباب اكلج لا تطلعين<br>
+        هسه شلون اطلعج من حَياتي<br>
+    </p>
+    __________________________________
+    <br>
+    <video width="320" height="240" controls>
+        <source src="https://i.imgur.com/yu4OWzN.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <p>
+        لا يُمكنك أن تُشفى في نفس البيئة التي جعلتك مريضا، غادر
+    </p>
+    __________________________________
+</body>
+</html>
+    <br>
+    <video width="320" height="240" controls>
+        <source src="https://imgur.com/r3WuxZb.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <p>
+ناري ماتطفى ولا نارك طفت 🖤.
+__________________________________
+</p>
+
+
+   <br>
+    <video width="320" height="240" controls>
+        <source src="https://imgur.com/jA50teP.mp4" type="video/mp4">
+        <p>
+        __________________________________
+        </p>
+        </body>
+        </html>
+                """)
+
+
+if __name__ == '__main__':
+    start_server(app, port=8080, host='0.0.0.0', debug=True)
